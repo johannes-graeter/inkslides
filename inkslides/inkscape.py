@@ -28,7 +28,7 @@ class InkscapeWorker(multiprocessing.Process):
             # The variable ready keeps track of that.
 
             if not cached:
-                command = '-A "{1}" "{0}"\n'.format(svg_file, pdf_file_name)
+                command = '--export-area-page -A "{1}" "{0}"\n'.format(svg_file, pdf_file_name)
                 self.ink.stdin.write(command.encode("UTF-8"))
                 self.ink.stdin.flush()
 
