@@ -52,7 +52,8 @@ class PyPDFMerger(Merger):
                 for stream in streams:
                     stream.close()
 
-        except:
+        except Exception as exc:
+            print(exc)
             raise MergeFailedException("Could not merge using PyPDF2")
 
 
