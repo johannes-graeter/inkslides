@@ -102,7 +102,14 @@ class InkSlides(object):
 
         print("Creating SVG slides ...")
         if self.create_slides_svg():
-            print("PDF should be up to date. Quitting ...")
+            print("PDF should be up to date. Merging PDF slides and quitting ...")
+            # Get pdf file names
+            self.pdf_files = []
+            for svg_file, cached in self.svg_files:
+                pdf_file = self.pdf_from_svg(svg_file)
+                self.pdf_files.append(pdf_file)
+            # Join in case we modified the pdfs (for videos f.e.)
+            self.join_slides_pdf()
             return
 
         print("Creating PDF slides in parallel on {} workers...".format(self.num_workers))

@@ -1,5 +1,6 @@
 #!/bin/bash
-stripped_name=${3%%.*}
+stripped_name=${3%%.pdf}_tmp
+
 echo "writing to $stripped_name.pdf"
 
 echo "\documentclass[]{beamer}
@@ -21,5 +22,6 @@ echo "\documentclass[]{beamer}
 
 \end{document}" > $stripped_name.tex
 
-pdflatex $stripped_name.tex
+pdflatex -output-directory=$(dirname $3) $stripped_name.tex
+mv ${3%%.pdf}_tmp.pdf $3
 
