@@ -41,6 +41,8 @@ Polar bears
   Weaknesses of polar bears
 Title
   Welcome
+_import_layer
+_import_layer1
 ```
 
 This would result in a PDF with the following slides, where each line contains 
@@ -57,6 +59,8 @@ Polar bears,Why polar bears are cool,Argument 1,Argument 2,Argument 3
 As you can see, the layers in the third level of the layer tree are treated as 
 frames, where the previous slides stay visible. If there are no sublayers of 
 sublayers, we end up with a simple slide without any frames.
+Note that layers without sublayers such as _import_layer will not be added.
+You can use them for imports (see below).
 
 ### Text directives
 
@@ -69,16 +73,17 @@ example:
 
 ```
 #import#
-Argument 3
-Weaknesses of polar bears
+_import_layer
+_import_layer1
 ```
 
-would make the two layers `Argument 3` and `Weaknesses of polar bears` visible,
-regardless of where in the presentation we are right now. 
+would make the two layers `_import_layer` and `_import_layer1` visible,
+regardless of where in the presentation we are right now.
+Note that only layers without sublayers can be properly imported.
 
 If any of the layers in an `#import#` block is prefixed with a `-` (minus) sign, 
 it won't be imported but rather _deleted_ from the current layer list. This is 
-particularly useful for the `#master'` block (see below).
+particularly useful for the `#master#` block (see below).
 
 #### master layers
 
@@ -86,7 +91,9 @@ particularly useful for the `#master'` block (see below).
 similar to the `#import#` structure. All layers you list in the master block are 
 visible on every single slide of your presentation. You may disable them by an 
 `#import#` directive with one of the master layers prefixed with a `-`. Note, 
-that the master block can appear _anywhere_ in your SVG file. 
+that the master block can appear _anywhere_ in your SVG file.
+The `#master#` command can hence be seen as an `#import#` for all slides, 
+which only has to be specified once.
 
 If multiple `#master#` blocks are found globally, or multiple `#import#` blocks 
 are present in one layer, the first one is chosen and the others are ignored. 
